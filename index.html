@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanskar Sinchan - Annual Summary 2024-25</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .description {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 18px 50px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px);
+        }
+
+        .secondary-button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .secondary-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .feature {
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            font-size: 0.95em;
+            opacity: 0.85;
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+            opacity: 0.8;
+            font-size: 0.95em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+            }
+
+            .cta-button {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🔥</div>
+        
+        <div class="badge">Annual Summary 2024-25</div>
+        
+        <h1>Sanskar Sinchan</h1>
+        <p class="subtitle">Dada Bhagwan Foundation Adalaj</p>
+        
+        <p class="description">
+            Explore our annual report with an interactive flipbook viewer. 
+            Experience beautiful 3D page-turning animations and navigate through 
+            our year's journey with ease.
+        </p>
+
+        <div>
+            <a href="flipbook.html" class="cta-button">📖 Open Flipbook</a>
+            <a href="#features" class="cta-button secondary-button">Learn More</a>
+        </div>
+
+        <div class="features" id="features">
+            <div class="feature">
+                <div class="feature-icon">📖</div>
+                <div class="feature-title">Book Spread View</div>
+                <div class="feature-desc">Read like a real book with 2-page spread</div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🎭</div>
+                <div class="feature-title">3D Animations</div>
+                <div class="feature-desc">Smooth realistic page-turning effects</div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⌨️</div>
+                <div class="feature-title">Easy Navigation</div>
+                <div class="feature-desc">Keyboard, buttons, and page jumping</div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🔍</div>
+                <div class="feature-title">Zoom Controls</div>
+                <div class="feature-desc">50% to 200% zoom levels available</div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <div class="feature-title">Fully Responsive</div>
+                <div class="feature-desc">Perfect on desktop, tablet, and mobile</div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Fast Loading</div>
+                <div class="feature-desc">Client-side rendering, no server needed</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Built with ❤️ using HTML5, CSS3, and PDF.js</p>
+            <p style="margin-top: 10px; opacity: 0.7;">
+                © 2024-25 Dada Bhagwan Foundation Adalaj | All rights reserved
+            </p>
+        </div>
+    </div>
+</body>
+</html>
