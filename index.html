@@ -1,255 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanskar Sinchan - Annual Summary 2024-25</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flipbook</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/blasten/turn.js/turn.min.js"></script>
 
-        .container {
-            max-width: 900px;
-            width: 100%;
-            text-align: center;
-            color: white;
-            animation: fadeIn 0.8s ease-out;
-        }
+<style>
+body {
+    margin: 0;
+    background: #0d0d0d;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: white;
+    overflow: hidden;
+}
 
-        .logo {
-            font-size: 4em;
-            margin-bottom: 20px;
-            animation: bounce 1s ease-out;
-        }
+/* Loader */
+#loader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0d0d0d;
+    font-size: 18px;
+}
 
-        h1 {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            line-height: 1.2;
-        }
+/* Flipbook */
+#flipbook {
+    display: none;
+    margin: auto;
+}
 
-        .subtitle {
-            font-size: 1.5em;
-            opacity: 0.95;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
+/* Page */
+.page {
+    background: #111;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
 
-        .description {
-            font-size: 1.1em;
-            opacity: 0.9;
-            margin-bottom: 40px;
-            line-height: 1.6;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+.page img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 18px 50px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: 700;
-            margin: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            cursor: pointer;
-            border: none;
-        }
+/* Center fold */
+#flipbook::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.05);
+    z-index: 10;
+}
 
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
+/* Topbar */
+.topbar {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+    display: flex;
+    gap: 8px;
+}
 
-        .cta-button:active {
-            transform: translateY(-2px);
-        }
+.btn {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    cursor: pointer;
+}
 
-        .secondary-button {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid white;
-        }
+/* Counter */
+.counter {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+}
 
-        .secondary-button:hover {
-            background: rgba(255,255,255,0.3);
-        }
+/* Thumbnails */
+.thumbs {
+    position: fixed;
+    bottom: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+}
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 2px solid rgba(255,255,255,0.2);
-        }
+.thumbs img {
+    height: 60px;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.5;
+}
 
-        .feature {
-            padding: 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
+.thumbs img.active {
+    opacity: 1;
+    border: 2px solid white;
+}
 
-        .feature:hover {
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-5px);
-        }
+/* Mobile */
+@media (max-width: 768px) {
 
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+    #flipbook {
+        width: 100vw !important;
+        height: 85vh !important;
+    }
 
-        .feature-title {
-            font-size: 1.1em;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+    .thumbs {
+        display: none;
+    }
 
-        .feature-desc {
-            font-size: 0.95em;
-            opacity: 0.85;
-        }
-
-        .footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 2px solid rgba(255,255,255,0.2);
-            opacity: 0.8;
-            font-size: 0.95em;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-
-            .subtitle {
-                font-size: 1.2em;
-            }
-
-            .cta-button {
-                display: block;
-                width: 100%;
-                margin: 10px 0;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    .page img {
+        object-fit: contain;
+    }
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="logo">🔥</div>
-        
-        <div class="badge">Annual Summary 2024-25</div>
-        
-        <h1>Sanskar Sinchan</h1>
-        <p class="subtitle">Dada Bhagwan Foundation Adalaj</p>
-        
-        <p class="description">
-            Explore our annual report with an interactive flipbook viewer. 
-            Experience beautiful 3D page-turning animations and navigate through 
-            our year's journey with ease.
-        </p>
 
-        <div>
-            <a href="flipbook.html" class="cta-button">📖 Open Flipbook</a>
-            <a href="#features" class="cta-button secondary-button">Learn More</a>
-        </div>
+<div id="loader">Loading book...</div>
 
-        <div class="features" id="features">
-            <div class="feature">
-                <div class="feature-icon">📖</div>
-                <div class="feature-title">Book Spread View</div>
-                <div class="feature-desc">Read like a real book with 2-page spread</div>
-            </div>
+<div class="topbar">
+    <button class="btn" onclick="toggleFullscreen()">⛶</button>
+    <button class="btn" onclick="toggleThumbs()">☰</button>
+</div>
 
-            <div class="feature">
-                <div class="feature-icon">🎭</div>
-                <div class="feature-title">3D Animations</div>
-                <div class="feature-desc">Smooth realistic page-turning effects</div>
-            </div>
+<div id="flipbook"></div>
 
-            <div class="feature">
-                <div class="feature-icon">⌨️</div>
-                <div class="feature-title">Easy Navigation</div>
-                <div class="feature-desc">Keyboard, buttons, and page jumping</div>
-            </div>
+<div class="counter" id="counter">1 / 16</div>
 
-            <div class="feature">
-                <div class="feature-icon">🔍</div>
-                <div class="feature-title">Zoom Controls</div>
-                <div class="feature-desc">50% to 200% zoom levels available</div>
-            </div>
+<div class="thumbs" id="thumbs"></div>
 
-            <div class="feature">
-                <div class="feature-icon">📱</div>
-                <div class="feature-title">Fully Responsive</div>
-                <div class="feature-desc">Perfect on desktop, tablet, and mobile</div>
-            </div>
+<script>
+const totalPages = 16;
+let loaded = 0;
+let images = [];
 
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-title">Fast Loading</div>
-                <div class="feature-desc">Client-side rendering, no server needed</div>
-            </div>
-        </div>
+// Preload images
+for (let i = 1; i <= totalPages; i++) {
+    let img = new Image();
+    img.src = `page${i}.jpg`;
 
-        <div class="footer">
-            <p>Built with ❤️ using HTML5, CSS3, and PDF.js</p>
-            <p style="margin-top: 10px; opacity: 0.7;">
-                © 2024-25 Dada Bhagwan Foundation Adalaj | All rights reserved
-            </p>
-        </div>
-    </div>
+    img.onload = () => {
+        loaded++;
+        if (loaded === totalPages) initBook();
+    };
+
+    images.push(img);
+}
+
+function initBook() {
+
+    const flipbook = document.getElementById("flipbook");
+
+    let ratio = images[0].width / images[0].height;
+
+    let width = window.innerWidth * 0.9;
+    let height = width / ratio;
+
+    if (height > window.innerHeight * 0.85) {
+        height = window.innerHeight * 0.85;
+        width = height * ratio;
+    }
+
+    // Create pages
+    for (let i = 0; i < totalPages; i++) {
+        let div = document.createElement("div");
+        div.className = "page";
+
+        let img = images[i];
+        div.appendChild(img);
+
+        flipbook.appendChild(div);
+    }
+
+    // Thumbnails
+    for (let i = 1; i <= totalPages; i++) {
+        let thumb = document.createElement("img");
+        thumb.src = `page${i}.jpg`;
+
+        thumb.onclick = () => $('#flipbook').turn('page', i);
+
+        document.getElementById("thumbs").appendChild(thumb);
+    }
+
+    document.getElementById("loader").style.display = "none";
+    flipbook.style.display = "block";
+
+    $('#flipbook').turn({
+        width: width,
+        height: height,
+        autoCenter: true,
+        elevation: 120,
+        gradients: true,
+        duration: 700,
+        when: {
+            turned: function(e, page) {
+                document.getElementById("counter").innerText = page + " / " + totalPages;
+
+                document.querySelectorAll(".thumbs img").forEach((img, i) => {
+                    img.classList.toggle("active", i+1 === page);
+                });
+            }
+        }
+    });
+
+    // Swipe
+    let startX = 0;
+
+    document.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener("touchend", e => {
+        let endX = e.changedTouches[0].clientX;
+
+        if (startX - endX > 50) {
+            $('#flipbook').turn('next');
+        } else if (endX - startX > 50) {
+            $('#flipbook').turn('previous');
+        }
+    });
+}
+
+// Fullscreen
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+// Toggle thumbnails
+function toggleThumbs() {
+    let thumbs = document.getElementById("thumbs");
+    thumbs.style.display = (thumbs.style.display === "flex") ? "none" : "flex";
+}
+
+// Fix resize
+window.addEventListener("resize", () => {
+    location.reload();
+});
+</script>
+
 </body>
 </html>
